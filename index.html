@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>半导体基础例题全集 (Ch3 & Ch4)</title>
+    
+    <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
+    <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" onerror="this.disabled=true;">
+    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.js" onerror="window.katex=null;"></script>
+    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/contrib/auto-render.min.js" onerror="window.renderMathInElement=null;"></script>
+
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --primary-color: #2563eb;
+            --primary-light: #eff6ff;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --ch3-color: #059669; /* Green for Ch3 */
+            --ch3-bg: #ecfdf5;
+            --ch4-color: #7c3aed; /* Purple for Ch4 */
+            --ch4-bg: #f5f3ff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container { display: flex; flex: 1; max-width: 1440px; margin: 0 auto; width: 100%; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: #ffffff;
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        .sidebar-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        .sidebar-title { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; }
+        .sidebar-subtitle { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+        .nav-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-btn:hover { background-color: var(--bg-color); color: var(--primary-color); }
+        .nav-btn.active { background-color: var(--primary-light); color: var(--primary-color); border-left: 4px solid var(--primary-color); }
+        
+        /* Main Content */
+        .main-content { flex: 1; padding: 2rem 3rem; max-width: 1000px; width: 100%; }
+        .section-header { margin-bottom: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; }
+        .section-title { font-size: 2rem; font-weight: 800; color: #111827; margin-bottom: 0.5rem; }
+        .section-desc { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        .badge-ch3 { background-color: var(--ch3-bg); color: var(--ch3-color); border: 1px solid var(--ch3-color); }
+        .badge-ch4 { background-color: var(--ch4-bg); color: var(--ch4-color); border: 1px solid var(--ch4-color); }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .card:hover { box-shadow: 0 8px 16px -4px rgba(0,0,0,0.1); transform: translateY(-2px); border-color: #d1d5db; }
+        
+        .card-header {
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+        .card-content { display: flex; gap: 1rem; width: 100%; }
+        .question-index {
+            background: #f1f5f9;
+            color: #64748b;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .question-text { font-weight: 600; color: #1f2937; font-size: 1.05rem; line-height: 1.5; }
+        
+        .card-body {
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        .card.open .card-body { display: block; }
+        .card.open .icon-chevron { transform: rotate(180deg); }
+
+        .answer-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .answer-text { color: #334155; white-space: pre-wrap; font-size: 0.95rem; }
+        .highlight { color: var(--primary-color); font-weight: 600; }
+
+        /* Mobile */
+        .mobile-header { display: none; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { display: none; width: 100%; height: auto; position: fixed; z-index: 50; border-bottom: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+            .sidebar.show { display: block; }
+            .mobile-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 60; }
+            .main-content { padding: 1.5rem 1rem; }
+        }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .math-inline { font-family: "Times New Roman", serif; font-style: italic; background: #fff; padding: 0 4px; border-radius: 3px; border: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-header">
+        <h1 style="font-weight: 800; color: #1f2937; font-size: 1.1rem;">半导体例题全集</h1>
+        <button onclick="toggleSidebar()" style="background:none; border:none; padding: 8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <span>例题全集</span>
+                </div>
+                <div class="sidebar-subtitle">Ch3 Materials & Ch4 Devices</div>
+            </div>
+            <div id="nav-links"></div>
+            <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfdf5;border:1px solid #059669;display:inline-block;"></span> Ch3 材料 (Materials)</div>
+                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="section-header" class="section-header"></div>
+            <div id="questions-container"></div>
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
+                &copy; 2025 Generated for Fundamentals of Devices • Chapter 3 & 4 • Bilingual Version
+            </div>
+        </main>
+    </div>
+
+<script>
+// --- 完整题库数据 (Integrated Data) ---
+const studyData = [
+    {
+        id: 'calculations',
+        title: '一、计算例题 (Calculations)',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M16 14h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>',
+        description: 'Carrier concentration, resistivity, and sheet resistance calculations.\n载流子浓度、电阻率及方块电阻的计算。',
+        questions: [
+            {
+                badge: 'Ch3',
+                q: `**Question:**
+                Given donor concentration $N_D = 10^{15} cm^{-3}$ (Silicon, Room Temperature).
+                Find:
+                1. Majority carrier (electron) concentration?
+                2. Minority carrier (hole) concentration?
+                
+                **题目:**
+                已知施主浓度 $N_D = 10^{15} cm^{-3}$ (硅，室温)。
+                求：
+                1. 多数载流子 (电子) 浓度？
+                2. 少数载流子 (空穴) 浓度？`,
+                a: `**1. Majority Carrier (Electron) / 多数载流子 (电子):**
+                $$n_n \\approx N_D = 10^{15} cm^{-3}$$
+                
+                **2. Minority Carrier (Hole) / 少数载流子 (空穴):**
+                Using Mass Action Law $np = n_i^2$ (Assume $n_i \\approx 1.45 \\times 10^{10} cm^{-3}$):
+                根据质量作用定律：
+                $$p_n = \\frac{n_i^2}{n_n} = \\frac{(1.45 \\times 10^{10})^2}{10^{15}} \\approx 2.1 \\times 10^5 cm^{-3}$$`
+            },
+            {
+                badge: 'Ch3',
+                q: `**Question:**
+                For a thin film material (thickness is 100 microns), its sheet resistance is $3000\\Omega/sq$, find its resistivity.
+                
+                **题目:**
+                对于厚度为 100 微米的薄膜材料，其方块电阻为 $3000\\Omega/sq$，求其电阻率。`,
+                a: `**Answer / 答案:** $30 \\Omega \\cdot cm$
+                
+                **Analysis / 解析:**
+                $\\rho = R_s \\times t = 3000 \\Omega \\times (100 \\times 10^{-4} cm) = 30 \\Omega \\cdot cm$`
+            },
+            {
+                badge: 'Ch3',
+                q: `**Question:**
+                Please confirm the material's thickness given:
+                Sheet Resistance: $15-3,000 \\Omega/sq$; Bulk Resistivity: $1.0-200 \\Omega \\cdot cm$.
+                
+                **题目:**
+                请根据以下数据确认材料厚度：
+                方块电阻：$15-3,000 \\Omega/sq$；体电阻率：$1.0-200 \\Omega \\cdot cm$。`,
+                a: `**Answer / 答案:** Approx. $0.067 cm$ (or $600-700 \\mu m$)
+                
+                **Analysis / 解析:**
+                Using $t = \\rho / R_s$:
+                利用公式 $t = \\rho / R_s$：
+                Low end / 低值: $1.0 / 15 \\approx 0.067 cm$
+                High end / 高值: $200 / 3000 \\approx 0.067 cm$
+                This matches standard wafer thickness. (符合标准硅片厚度)`
+            }
+        ]
+    },
+    {
+        id: 'quiz',
+        title: '二、概念测验 (Quiz)',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
+        description: 'Conceptual tests covering semiconductor materials and device physics.\n涵盖半导体材料及器件物理的概念测试。',
+        questions: [
+            // --- Ch3 Questions ---
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                What type of silicon contains fewer free electrons than pure silicon crystals?
+                **题目:**
+                哪种类型的硅含有的自由电子比纯硅晶体少？`, 
+                a: `**Answer / 答案: P-type (P型)**
+                **Reason:** In P-type, holes are majority carriers, electrons are minority.
+                原因：P型半导体中空穴是多子，电子是少子。` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                What is the name given to an impurity atom that adds holes to a semiconductor crystal structure?
+                **题目:**
+                向半导体晶体结构中增加空穴的杂质原子被称为什么？`, 
+                a: `**Answer / 答案: Acceptor impurity (受主杂质)**` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                Which of the following is not a Wide-bandgap semiconductor?
+                A. SiC  B. GaN  C. Diamond  D. InP
+                **题目:**
+                下列哪项不是宽禁带半导体？
+                A. SiC  B. GaN  C. Diamond  D. InP`, 
+                a: `**Answer / 答案: D. InP** **Reason:** InP bandgap is ~1.34eV, considered 2nd Gen, not Wide Bandgap (>2.3eV).
+                原因：InP带隙约1.34eV，属于第二代，非宽禁带。` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                As comparison, a semiconductor material with wider band gap will have ( ) intrinsic carrier concentration.
+                **题目:**
+                相比之下，带隙更宽的半导体材料将具有（ ）本征载流子浓度。`, 
+                a: `**Answer / 答案: Less (更少)**
+                **Reason:** $n_i \\propto e^{-E_g/2kT}$. Larger $E_g$ leads to smaller $n_i$.
+                原因：带隙 $E_g$ 越大，浓度越低。` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                Mass Action Law is valid under ( ) conditions.
+                **题目:**
+                质量作用定律在（ ）条件下对本征和非本征半导体均有效。`, 
+                a: `**Answer / 答案: Thermal equilibrium (热平衡)**` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                As temperature increased, a light-doping semiconductor material sheet resistor will ( ), mobility will ( ), intrinsic carrier concentration will ( ).
+                **题目:**
+                随着温度升高，轻掺杂半导体材料的方块电阻将（ ），载流子迁移率将（ ），本征载流子浓度将（ ）。`, 
+                a: `**Answer / 答案:** 1. **Increase (增加)** (Resistance / 电阻)
+                2. **Decrease (减小)** (Mobility / 迁移率 - due to lattice scattering / 晶格散射)
+                3. **Increase (增加)** (Intrinsic concentration / 本征浓度 - due to thermal excitation / 热激发)` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                As concentration increased, a semiconductor material sheet resistor will ( ) and its mobility will ( ).
+                **题目:**
+                随着掺杂浓度增加，半导体材料的方块电阻将（ ），迁移率将（ ）。`, 
+                a: `**Answer / 答案:**
+                1. **Decrease (减小)** (Resistance / 电阻)
+                2. **Decrease (减小)** (Mobility / 迁移率 - due to impurity scattering / 杂质散射)` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                The Van der Pauw Method measures ( ) and ( ). Electrodes are placed on its ( ).
+                **题目:**
+                范德堡法通常用于测量样品的（ ）和（ ）。电极放置在其（ ）。`, 
+                a: `**Answer / 答案:**
+                1. **Resistivity (电阻率)**
+                2. **Hall Coefficient/Mobility (霍尔系数/迁移率)**
+                3. **Perimeter/Edges (周边/边缘)**` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                In what application is GaAs used in preference to Si? Why?
+                **题目:**
+                在什么应用中 GaAs 优于 Si？为什么？`, 
+                a: `**Answer / 答案: Microwave frequencies (微波频率)**
+                **Reason:** Because GaAs has higher electron mobility.
+                原因：因为 GaAs 具有更高的电子迁移率。` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                The resistivity of semiconductor material is NOT related to: A. Temperature B. Size C. Doping D. Concentration
+                **题目:**
+                半导体材料的电阻率与下列哪个因素无关：A. 温度 B. 尺寸 C. 掺杂 D. 浓度`, 
+                a: `**Answer / 答案: B. Size (尺寸)**
+                **Reason:** Resistivity is an intrinsic property.
+                原因：电阻率是材料的本征属性。` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                List the 1st, 2nd, and 3rd Generation Semiconductors.
+                **题目:**
+                列出第一、二、三代半导体。`, 
+                a: `**Answer / 答案:**
+                1. **1st:** Si, Ge
+                2. **2nd:** GaAs, InP
+                3. **3rd:** GaN, SiC` 
+            },
+            { 
+                badge: 'Ch3', 
+                q: `**Question:**
+                Which is NOT a third Generation Semiconductor? A. GaN B. SiGe C. ZnO D. AlN
+                **题目:**
+                下列哪项不是第三代半导体？A. GaN B. SiGe C. ZnO D. AlN`, 
+                a: `**Answer / 答案: B. SiGe**` 
+            },
+
+            // --- Ch4 Questions ---
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                What are the "Building blocks" of semiconductor devices?
+                **题目:**
+                半导体器件的“基本构建模块”有哪些？`, 
+                a: `**Answer / 答案:** PN Junction (PN结), Metal-Semiconductor Junction (金属半导体结), Heterojunction (异质结), MOS Structure (MOS结构).` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                M-S junctions: Rectifying is called ( ), Non-rectifying is called ( ). The reason is difference in ( ).
+                **题目:**
+                M-S结：整流的称为（ ），非整流的称为（ ）。原因是（ ）不同。`, 
+                a: `**Answer / 答案:**
+                1. **Schottky Contact (肖特基接触)**
+                2. **Ohmic Contact (欧姆接触)**
+                3. **Work Function (功函数)**` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Characteristic of Schottky Barrier diode vs Si diode?
+                **题目:**
+                肖特基势垒二极管（SBD）相比普通硅二极管的特性？`, 
+                a: `**Answer / 答案: Less forward voltage drop (更低的正向导通压降)**
+                (Low voltage drop & fast switching / 低压降且开关快)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Zener breakdown occurs in ( ).
+                **题目:**
+                齐纳击穿发生于（ ）。`, 
+                a: `**Answer / 答案: Heavily doped p/n region (重掺杂的p/n区)**
+                (Causes tunneling at low voltage / 在低压下引发隧道效应)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                What is a depletion-mode MOSFET?
+                **题目:**
+                什么是耗尽型 MOSFET？`, 
+                a: `**Answer / 答案:** Current flows when no gate voltage is applied (Normally On).
+                无栅极电压时也有电流流过（常开型）。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Advantage of CMOS over TTL?
+                **题目:**
+                CMOS 相比 TTL 的优势？`, 
+                a: `**Answer / 答案: Lower power consumption (更低功耗)**
+                (Low static power / 极低的静态功耗)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Which device is NOT bipolar? A. SBD B. PN C. BJT D. HBT
+                **题目:**
+                哪种器件不是双极型的？A. SBD B. PN C. BJT D. HBT`, 
+                a: `**Answer / 答案: A. SBD** (Unipolar, majority carrier only / 单极性，仅多数载流子)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Which device uses heterostructure? A. MESFET B. HEMT C. CMOS D. BJT
+                **题目:**
+                哪种器件使用了异质结构？A. MESFET B. HEMT C. CMOS D. BJT`, 
+                a: `**Answer / 答案: B. HEMT** (High Electron Mobility Transistor / 高电子迁移率晶体管)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Why HEMT has faster speed? (Select NOT reason)
+                **题目:**
+                HEMT 速度快的原因？（选出错误的）`, 
+                a: `**Answer / 答案: C. Doped substrate (掺杂衬底)**
+                **Correction:** HEMT uses **undoped** channel for high mobility to reduce scattering.
+                更正：HEMT 使用**未掺杂**沟道以提高迁移率并减少散射。` 
+            }
+        ]
+    },
+    {
+        id: 'analysis',
+        title: '三、分析与应用 (Analysis)',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>',
+        description: 'Graph analysis and experimental design.\n图表分析及实验设计。',
+        questions: [
+            // --- Ch3 Analysis ---
+            {
+                badge: 'Ch3',
+                q: `**Question (Mobility Graph Analysis):**
+                Based on Silicon mobility vs impurity concentration at 300K:
+                1. Why is electron mobility higher than hole mobility?
+                2. Relationship between mobility and doping? Why?
+                3. Main factors affecting mobility?
+                
+                **题目 (迁移率图表分析):**
+                基于300K下硅的迁移率与杂质浓度关系图：
+                1. 为什么电子迁移率高于空穴？
+                2. 迁移率与掺杂的关系及原因？
+                3. 影响迁移率的主要因素？`,
+                a: `**1. Effective Mass / 有效质量:**
+                Electron effective mass ($m_n^*$) is smaller than hole effective mass ($m_p^*$).
+                电子有效质量 ($m_n^*$) 小于空穴有效质量 ($m_p^*$)。
+                
+                **2. Relationship / 关系:** Mobility decreases as doping increases due to **Impurity Scattering**.
+                随着掺杂增加，迁移率下降，原因是**杂质散射**。
+                
+                **3. Factors / 因素:** Temperature (Lattice scattering) and Doping Concentration (Impurity scattering).
+                温度（晶格散射）和掺杂浓度（杂质散射）。`
+            },
+            {
+                badge: 'Ch3',
+                q: `**Question (Experiment Design):**
+                Design a Van der Pauw experiment to find Resistivity, Carrier Concentration, and Mobility.
+                
+                **题目 (实验设计):**
+                设计范德堡法实验以测量电阻率、载流子浓度和迁移率。`,
+                a: `**1. Precautions / 注意事项:**
+                Ohmic contacts, placed on perimeter, small contact size, uniform thickness.
+                欧姆接触，放置在边缘，接触点小，厚度均匀。
+                
+                **2. Steps / 步骤:**
+                * **Resistivity / 电阻率:** Measure edge resistance ($R_{AB,CD}$), solve Van der Pauw eq for $R_s$, then $\\rho = R_s \\times t$.
+                * **Carrier Conc / 载流子浓度:** Apply B field, measure Hall voltage ($V_H$), calculate $n \\propto I \\cdot B / V_H$.
+                * **Mobility / 迁移率:** Calculate $\\mu = 1 / (q n \\rho)$.`
+            },
+
+            // --- Ch4 Analysis ---
+            {
+                badge: 'Ch4',
+                q: `**Question (BJT Band Diagram):**
+                Based on the BJT energy band diagram (Wide gap Emitter, Narrow Base):
+                1. Type (NPN/PNP)?
+                2. Base region requirements?
+                3. What injection does HBT suppress?
+                
+                **题目 (BJT 能带图分析):**
+                基于 BJT 能带示意图（宽带隙发射区，窄基区）：
+                1. 类型（NPN/PNP）？
+                2. 基区要求？
+                3. HBT 抑制了哪种注入？`,
+                a: `**1. Type / 类型:** NPN.
+                
+                **2. Base / 基区:** Must be **Thin** and **Lightly Doped**.
+                必须**薄**且**轻掺杂**。
+                
+                **3. HBT:** Suppresses **Hole injection** from Base to Emitter due to the valence band offset ($\\Delta E_v$).
+                由于价带偏移 ($\\Delta E_v$)，抑制了**空穴**从基区向发射区的注入。`
+            },
+            {
+                badge: 'Ch4',
+                q: `**Question (HEMT Structure):**
+                Refer to GaAs HEMT structure:
+                1. What does HEMT stand for?
+                2. Where is the 2DEG formed?
+                3. Working principle?
+                
+                **题目 (HEMT 结构):**
+                参考 GaAs HEMT 结构：
+                1. HEMT 代表什么？
+                2. 2DEG 在哪里形成？
+                3. 工作原理？`,
+                a: `**1. Name / 名称:** High Electron Mobility Transistor (高电子迁移率晶体管).
+                
+                **2. 2DEG:** Formed in the **undoped GaAs** layer, at the interface with doped AlGaAs, due to the quantum well.
+                在**未掺杂的 GaAs** 层中，与掺杂 AlGaAs 的界面处形成。
+                
+                **3. Principle / 原理:** Gate voltage modulates the 2DEG density in the high-mobility undoped channel, controlling current.
+                栅极电压调节高迁移率未掺杂沟道中的 2DEG 密度。`
+            }
+        ]
+    }
+];
+
+// --- Render Logic ---
+let currentSectionId = studyData[0].id;
+
+function render() {
+    // Render Sidebar
+    const navLinks = document.getElementById('nav-links');
+    navLinks.innerHTML = studyData.map(section => `
+        <button class="nav-btn ${section.id === currentSectionId ? 'active' : ''}" onclick="switchSection('${section.id}')">
+            ${section.icon}
+            <span>${section.title}</span>
+        </button>
+    `).join('');
+
+    // Render Header
+    const currentSection = studyData.find(s => s.id === currentSectionId);
+    const header = document.getElementById('section-header');
+    header.innerHTML = `
+        <h2 class="section-title">${currentSection.title}</h2>
+        <p class="section-desc">${currentSection.description}</p>
+    `;
+
+    // Render Questions
+    const container = document.getElementById('questions-container');
+    container.innerHTML = currentSection.questions.map((q, idx) => {
+        const badgeClass = q.badge === 'Ch3' ? 'badge-ch3' : 'badge-ch4';
+        return `
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="card-header">
+                    <div class="card-content">
+                        <div class="question-index">${idx + 1}</div>
+                        <div>
+                            <span class="badge ${badgeClass}">${q.badge}</span>
+                            <span class="question-text">${parseText(q.q)}</span>
+                        </div>
+                    </div>
+                    <svg class="icon-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                <div class="card-body" onclick="event.stopPropagation()">
+                    <div class="answer-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Answer & Analysis
+                    </div>
+                    <div class="answer-text">${parseText(q.a)}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Trigger Math Rendering
+    if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });
+    }
+}
+
+function switchSection(id) {
+    currentSectionId = id;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile sidebar if open
+    document.getElementById('sidebar').classList.remove('show');
+}
+
+function parseText(text) {
+    if (!text) return '';
+    let html = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    html = html.replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>');
+    html = html.replace(/\n/g, '<br>');
+    // Fallback math parsing if KaTeX fails
+    if (!window.renderMathInElement) {
+        html = html.replace(/\$([a-zA-Z0-9]+)\^([a-zA-Z0-9\+\-]+)\$/g, '<span class="math-inline">$1<sup>$2</sup></span>');
+        html = html.replace(/\$([a-zA-Z0-9]+)\_([a-zA-Z0-9\+\-]+)\$/g, '<span class="math-inline">$1<sub>$2</sub></span>');
+        html = html.replace(/\$(.*?)\$/g, '<span class="math-inline">$1</span>');
+    }
+    return html;
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('show');
+}
+
+// Initial Render
+render();
+</script>
+</body>
+</html>
