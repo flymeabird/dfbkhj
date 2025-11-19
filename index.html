@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>半导体基础例题全集 (Ch3 & Ch4)</title>
+    <title>半导体基础例题全集 (Bilingual Edition)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
     <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" onerror="this.disabled=true;">
@@ -70,6 +70,7 @@
             text-align: left;
             font-size: 0.9rem;
             font-weight: 600;
+            line-height: 1.4;
         }
         .nav-btn:hover { background-color: var(--bg-color); color: var(--primary-color); }
         .nav-btn.active { background-color: var(--primary-light); color: var(--primary-color); border-left: 4px solid var(--primary-color); }
@@ -78,7 +79,7 @@
         .main-content { flex: 1; padding: 2rem 3rem; max-width: 1000px; width: 100%; }
         .section-header { margin-bottom: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; }
         .section-title { font-size: 2rem; font-weight: 800; color: #111827; margin-bottom: 0.5rem; }
-        .section-desc { color: var(--text-secondary); font-size: 1.1rem; }
+        .section-desc { color: var(--text-secondary); font-size: 1.1rem; white-space: pre-line; }
 
         /* Badges */
         .badge {
@@ -140,11 +141,13 @@
         .card.open .card-body { display: block; }
         .card.open .icon-chevron { transform: rotate(180deg); }
 
+        .answer-section { margin-bottom: 1rem; }
         .answer-label {
             font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-secondary);
             text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -276,7 +279,7 @@ const studyData = [
                 What type of silicon contains fewer free electrons than pure silicon crystals?
                 **题目:**
                 哪种类型的硅含有的自由电子比纯硅晶体少？`, 
-                a: `**Answer / 答案: P-type (P型)**
+                a: `**Answer / 答案: B. P-type (P型)**
                 **Reason:** In P-type, holes are majority carriers, electrons are minority.
                 原因：P型半导体中空穴是多子，电子是少子。` 
             },
@@ -286,7 +289,7 @@ const studyData = [
                 What is the name given to an impurity atom that adds holes to a semiconductor crystal structure?
                 **题目:**
                 向半导体晶体结构中增加空穴的杂质原子被称为什么？`, 
-                a: `**Answer / 答案: Acceptor impurity (受主杂质)**` 
+                a: `**Answer / 答案: C. Acceptor impurity (受主杂质)**` 
             },
             { 
                 badge: 'Ch3', 
@@ -354,7 +357,7 @@ const studyData = [
                 In what application is GaAs used in preference to Si? Why?
                 **题目:**
                 在什么应用中 GaAs 优于 Si？为什么？`, 
-                a: `**Answer / 答案: Microwave frequencies (微波频率)**
+                a: `**Answer / 答案: C. Microwave frequencies (微波频率)**
                 **Reason:** Because GaAs has higher electron mobility.
                 原因：因为 GaAs 具有更高的电子迁移率。` 
             },
@@ -395,7 +398,10 @@ const studyData = [
                 What are the "Building blocks" of semiconductor devices?
                 **题目:**
                 半导体器件的“基本构建模块”有哪些？`, 
-                a: `**Answer / 答案:** PN Junction (PN结), Metal-Semiconductor Junction (金属半导体结), Heterojunction (异质结), MOS Structure (MOS结构).` 
+                a: `**Answer / 答案:** 1. PN Junction (PN结)
+                2. Metal-Semiconductor Junction (金属半导体结)
+                3. Heterojunction (异质结)
+                4. MOS Structure (MOS结构)` 
             },
             { 
                 badge: 'Ch4', 
@@ -404,9 +410,9 @@ const studyData = [
                 **题目:**
                 M-S结：整流的称为（ ），非整流的称为（ ）。原因是（ ）不同。`, 
                 a: `**Answer / 答案:**
-                1. **Schottky Contact (肖特基接触)**
-                2. **Ohmic Contact (欧姆接触)**
-                3. **Work Function (功函数)**` 
+                1. **Schottky Contact (肖特基接触)** - Rectifying
+                2. **Ohmic Contact (欧姆接触)** - Non-rectifying
+                3. **Work Function (功函数)** - The difference determines the type.` 
             },
             { 
                 badge: 'Ch4', 
@@ -414,8 +420,27 @@ const studyData = [
                 Characteristic of Schottky Barrier diode vs Si diode?
                 **题目:**
                 肖特基势垒二极管（SBD）相比普通硅二极管的特性？`, 
-                a: `**Answer / 答案: Less forward voltage drop (更低的正向导通压降)**
+                a: `**Answer / 答案: D. Less forward voltage drop (更低的正向导通压降)**
                 (Low voltage drop & fast switching / 低压降且开关快)` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Which of the following does not affect a semiconductor material work function?
+                A. Doping type
+                B. Doping concentration
+                C. Electronic Affinity
+                D. Contact material
+                
+                **题目:**
+                下列哪项不影响半导体材料的功函数？
+                A. 掺杂类型
+                B. 掺杂浓度
+                C. 电子亲和势
+                D. 接触材料`, 
+                a: `**Answer / 答案: D. Contact material (接触材料)**
+                **Analysis:** Work function $\\Phi_s$ is an intrinsic property determined by $\\chi$ (Affinity) and $E_F$ (Doping). The contact material affects the barrier height, not $\\Phi_s$ itself.
+                解析：功函数 $\\Phi_s$ 是由电子亲和势和费米能级（受掺杂影响）决定的本征属性。接触材料影响的是势垒高度，而非半导体的功函数本身。` 
             },
             { 
                 badge: 'Ch4', 
@@ -423,52 +448,200 @@ const studyData = [
                 Zener breakdown occurs in ( ).
                 **题目:**
                 齐纳击穿发生于（ ）。`, 
-                a: `**Answer / 答案: Heavily doped p/n region (重掺杂的p/n区)**
+                a: `**Answer / 答案: B. Heavily doped p/n region (重掺杂的p/n区)**
                 (Causes tunneling at low voltage / 在低压下引发隧道效应)` 
             },
             { 
                 badge: 'Ch4', 
                 q: `**Question:**
+                The primary application of the mercury probe is semiconductor measurements where otherwise time-consuming metallizations or photolithographic processing are required to make ( ) to a sample.
+                
+                **题目:**
+                汞探针的主要应用是半导体测量，它可以避免耗时的金属化或光刻工艺，直接在样品上形成（ ）。`, 
+                a: `**Answer / 答案: Contact (接触)**` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                Which is not the typical BJT Physical Structure:
+                A. Thin base region
+                B. Highly doped the emitter region
+                C. Highly doped the base region
+                D. Large area the collector region
+                
+                **题目:**
+                哪项不是典型的 BJT 物理结构特征：
+                A. 薄基区
+                B. 重掺杂发射区
+                C. 重掺杂基区
+                D. 大面积集电区`, 
+                a: `**Answer / 答案: C. Highly doped the base region (重掺杂基区)**
+                **Correction:** Base region must be **lightly doped** to reduce recombination.
+                更正：基区必须是**轻掺杂**的以减少复合。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                LED is different from the PD, as LED is Electricity ( ), light ( ).
+                
+                **题目:**
+                LED 不同于 PD（光电二极管），LED 是电（ ），光（ ）。`, 
+                a: `**Answer / 答案: (Input / 输入), (Output / 输出)**
+                **Explanation:** LED converts Electricity to Light. PD converts Light to Electricity.
+                解释：LED 将电转化为光（电进光出）。PD 将光转化为电。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                For a NPN HBT, typically the heterojunction exists in the ( ) region and ( ) regions. The material in ( ) region has wider bandgap.
+                
+                **题目:**
+                对于 NPN HBT，异质结通常存在于（ ）区和（ ）区之间。（ ）区的材料具有更宽的带隙。`, 
+                a: `**Answer / 答案: Emitter (发射), Base (基), Emitter (发射)**` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                In NPN HBT, wide bandgap material is used for Emitter, narrow bandgap for Base. This ( ) the barrier for electron injection from Emitter to Base, and ( ) the barrier for hole injection from Base to Emitter.
+                
+                **题目:**
+                在NPN型HBT中，采用宽带隙材料作发射区，窄带隙材料作基区。由于（ ）了电子从发射区注入到基区的势垒，同时（ ）了空穴由基区向发射区反注入的势垒。`, 
+                a: `**Answer / 答案: Lowered (降低), Raised/Increased (提高)**
+                **Result:** Improves injection efficiency and current gain ($\beta$).
+                结果：提高了注入效率和电流增益。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
                 What is a depletion-mode MOSFET?
+                A. Current flows when no gate voltage is applied
+                B. No current flows when no gate voltage is applied
+                
                 **题目:**
-                什么是耗尽型 MOSFET？`, 
-                a: `**Answer / 答案:** Current flows when no gate voltage is applied (Normally On).
-                无栅极电压时也有电流流过（常开型）。` 
+                什么是耗尽型 MOSFET？
+                A. 无栅极电压时也有电流流过
+                B. 无栅极电压时无电流流过`, 
+                a: `**Answer / 答案: A. Current flows when no gate voltage is applied (无栅极电压时也有电流流过)**
+                (Normally On device / 常开型器件)` 
             },
             { 
                 badge: 'Ch4', 
                 q: `**Question:**
-                Advantage of CMOS over TTL?
+                Which of the following is an advantage of CMOS logic devices over TTL devices?
+                A. Differential output capability
+                B. Lower distortion
+                C. Immune to damage from static discharge
+                D. Lower power consumption
+                
                 **题目:**
-                CMOS 相比 TTL 的优势？`, 
-                a: `**Answer / 答案: Lower power consumption (更低功耗)**
-                (Low static power / 极低的静态功耗)` 
+                CMOS 逻辑器件相比 TTL 器件的优势是什么？
+                A. 差分输出能力
+                B. 更低失真
+                C. 免受静电损伤
+                D. 更低功耗`, 
+                a: `**Answer / 答案: D. Lower power consumption (更低功耗)**` 
             },
             { 
                 badge: 'Ch4', 
                 q: `**Question:**
-                Which device is NOT bipolar? A. SBD B. PN C. BJT D. HBT
+                Which of the following devices is NOT a bipolar device?
+                A. SBD
+                B. PN Junction
+                C. BJT
+                D. HBT
+                
                 **题目:**
-                哪种器件不是双极型的？A. SBD B. PN C. BJT D. HBT`, 
+                下列哪种器件**不是**双极型器件？
+                A. SBD (肖特基二极管)
+                B. PN 结
+                C. BJT
+                D. HBT`, 
                 a: `**Answer / 答案: A. SBD** (Unipolar, majority carrier only / 单极性，仅多数载流子)` 
             },
             { 
                 badge: 'Ch4', 
                 q: `**Question:**
-                Which device uses heterostructure? A. MESFET B. HEMT C. CMOS D. BJT
+                Which of the following devices is a bipolar device?
+                A. CMOS
+                B. JFET
+                C. HEMT
+                D. HBT
+                
                 **题目:**
-                哪种器件使用了异质结构？A. MESFET B. HEMT C. CMOS D. BJT`, 
-                a: `**Answer / 答案: B. HEMT** (High Electron Mobility Transistor / 高电子迁移率晶体管)` 
+                下列哪种器件是双极型器件？
+                A. CMOS
+                B. JFET
+                C. HEMT
+                D. HBT`, 
+                a: `**Answer / 答案: D. HBT** (Heterojunction Bipolar Transistor / 异质结双极晶体管)` 
             },
             { 
                 badge: 'Ch4', 
                 q: `**Question:**
-                Why HEMT has faster speed? (Select NOT reason)
+                Which of the following devices uses heterostructure:
+                A. MESFET B. HEMT C. CMOS D. BJT
+                
                 **题目:**
-                HEMT 速度快的原因？（选出错误的）`, 
+                下列哪种器件使用了异质结构？
+                A. MESFET B. HEMT C. CMOS D. BJT`, 
+                a: `**Answer / 答案: B. HEMT**` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                The reason for why HEMT has faster speed is NOT because of:
+                A. 2DEG exists
+                B. High mobility substrate
+                C. Doped substrate
+                D. Un-doped substrate
+                
+                **题目:**
+                HEMT 速度快的原因**不是**因为：
+                A. 存在二维电子气 (2DEG)
+                B. 高迁移率衬底
+                C. 掺杂衬底
+                D. 未掺杂衬底`, 
                 a: `**Answer / 答案: C. Doped substrate (掺杂衬底)**
                 **Correction:** HEMT uses **undoped** channel for high mobility to reduce scattering.
                 更正：HEMT 使用**未掺杂**沟道以提高迁移率并减少散射。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                The BJT's base region must be thin enough is NOT because of:
+                A. can be much sharper gradient
+                B. can be much less recombination
+                C. diffuse across in much less time
+                D. can be much higher concentration
+                
+                **题目:**
+                BJT 基区必须足够薄，其原因**不包括**：
+                A. 可以有更陡的浓度梯度
+                B. 可以大大减少复合
+                C. 渡越时间更短
+                D. 可以有更高的掺杂浓度`, 
+                a: `**Answer / 答案: D. can be much higher concentration (可以有更高的掺杂浓度)**
+                **Reason:** Base must be lightly doped, not highly doped.
+                原因：基区必须是轻掺杂，而不是重掺杂。` 
+            },
+            { 
+                badge: 'Ch4', 
+                q: `**Question:**
+                The following feature of the light doping silicon is changed compared with the pure silicon:
+                A. Bandgap
+                B. Conduction band
+                C. Valence band
+                D. Fermi level
+                
+                **题目:**
+                与纯硅相比，轻掺杂硅的以下哪个特征发生了变化：
+                A. 带隙
+                B. 导带
+                C. 价带
+                D. 费米能级`, 
+                a: `**Answer / 答案: D. Fermi level (费米能级)**
+                **Reason:** Doping introduces impurity levels and shifts the Fermi level ($E_F$) towards $E_c$ (N-type) or $E_v$ (P-type). Bandgap is intrinsic.
+                原因：掺杂引入杂质能级，使费米能级向导带或价带移动。带隙是本征属性，基本不变。` 
             }
         ]
     },
@@ -476,7 +649,7 @@ const studyData = [
         id: 'analysis',
         title: '三、分析与应用 (Analysis)',
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>',
-        description: 'Graph analysis and experimental design.\n图表分析及实验设计。',
+        description: 'Chart analysis and experimental design questions.\n图表分析及实验设计题。',
         questions: [
             // --- Ch3 Analysis ---
             {
@@ -525,42 +698,51 @@ const studyData = [
                 q: `**Question (BJT Band Diagram):**
                 Based on the BJT energy band diagram (Wide gap Emitter, Narrow Base):
                 1. Type (NPN/PNP)?
-                2. Base region requirements?
-                3. What injection does HBT suppress?
+                2. Region 3 is which region?
+                3. Base region requirements?
+                4. HBT improves performance by utilizing different bandgaps. It increases the barrier for ( ) injection from Base to Emitter.
                 
                 **题目 (BJT 能带图分析):**
                 基于 BJT 能带示意图（宽带隙发射区，窄基区）：
                 1. 类型（NPN/PNP）？
-                2. 基区要求？
-                3. HBT 抑制了哪种注入？`,
+                2. 图中区域 3 是什么区？
+                3. 基区结构要求？
+                4. HBT 利用不同带隙，提高了（ ）从基区向发射区反注入的势垒。`,
                 a: `**1. Type / 类型:** NPN.
                 
-                **2. Base / 基区:** Must be **Thin** and **Lightly Doped**.
+                **2. Region / 区域:** Collector (集电区).
+                
+                **3. Base / 基区:** Must be **Thin** and **Lightly Doped** (to reduce recombination).
                 必须**薄**且**轻掺杂**。
                 
-                **3. HBT:** Suppresses **Hole injection** from Base to Emitter due to the valence band offset ($\\Delta E_v$).
-                由于价带偏移 ($\\Delta E_v$)，抑制了**空穴**从基区向发射区的注入。`
+                **4. Suppression / 抑制:** **Hole** (空穴).
+                (Wide bandgap emitter creates larger $\\Delta E_v$)`
             },
             {
                 badge: 'Ch4',
                 q: `**Question (HEMT Structure):**
                 Refer to GaAs HEMT structure:
-                1. What does HEMT stand for?
-                2. Where is the 2DEG formed?
-                3. Working principle?
+                1. What does HEMT stand for? Key feature?
+                2. Which interface does the heterojunction occur? How is it formed?
+                3. Compare Work Functions: Gate (Metal) vs AlGaAs? GaAs vs AlGaAs?
+                4. Working principle?
                 
                 **题目 (HEMT 结构):**
                 参考 GaAs HEMT 结构：
-                1. HEMT 代表什么？
-                2. 2DEG 在哪里形成？
-                3. 工作原理？`,
-                a: `**1. Name / 名称:** High Electron Mobility Transistor (高电子迁移率晶体管).
+                1. HEMT 全称？突出特点？
+                2. 异质结出现在哪个界面？如何形成？
+                3. 功函数比较：Gate(金属) 与 AlGaAs？GaAs 与 AlGaAs？
+                4. 工作原理？`,
+                a: `**1. Name / 名称:** High Electron Mobility Transistor (高电子迁移率晶体管). Feature: High speed, low noise.
                 
-                **2. 2DEG:** Formed in the **undoped GaAs** layer, at the interface with doped AlGaAs, due to the quantum well.
-                在**未掺杂的 GaAs** 层中，与掺杂 AlGaAs 的界面处形成。
+                **2. Heterojunction / 异质结:** Between **AlGaAs** and **GaAs**. Formed by epitaxy growth of wider bandgap AlGaAs on narrower GaAs.
                 
-                **3. Principle / 原理:** Gate voltage modulates the 2DEG density in the high-mobility undoped channel, controlling current.
-                栅极电压调节高迁移率未掺杂沟道中的 2DEG 密度。`
+                **3. Work Function / 功函数:**
+                * Gate (Metal) > AlGaAs (Forms Schottky barrier).
+                * GaAs > AlGaAs (Electron affinity difference creates quantum well).
+                
+                **4. Principle / 原理:** Gate voltage modulates the **2DEG** density in the undoped GaAs channel, controlling $I_{DS}$.
+                栅极电压调节未掺杂 GaAs 沟道中的 **2DEG** 浓度，从而控制电流。`
             }
         ]
     }
@@ -584,7 +766,7 @@ function render() {
     const header = document.getElementById('section-header');
     header.innerHTML = `
         <h2 class="section-title">${currentSection.title}</h2>
-        <p class="section-desc">${currentSection.description}</p>
+        <p class="section-desc">${parseText(currentSection.description)}</p>
     `;
 
     // Render Questions
@@ -606,7 +788,7 @@ function render() {
                 <div class="card-body" onclick="event.stopPropagation()">
                     <div class="answer-label">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                        Answer & Analysis
+                        Answer & Analysis / 答案与解析
                     </div>
                     <div class="answer-text">${parseText(q.a)}</div>
                 </div>
@@ -630,7 +812,6 @@ function switchSection(id) {
     currentSectionId = id;
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Close mobile sidebar if open
     document.getElementById('sidebar').classList.remove('show');
 }
 
