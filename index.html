@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>半导体基础例题全集 (Ch3 - Ch8)</title>
+    <title>半导体基础例题全集 (Ch1 - Ch8)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
     <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css">
@@ -21,6 +21,10 @@
             --border: #e5e7eb;
             
             /* Chapter Colors */
+            --ch1-color: #dc2626; /* Red for Introduction */
+            --ch1-bg: #fef2f2;
+            --ch2-color: #ea580c; /* Orange-Red for Industry */
+            --ch2-bg: #fff7ed;
             --ch3-color: #059669; /* Green */
             --ch3-bg: #ecfdf5;
             --ch4-color: #7c3aed; /* Purple */
@@ -31,7 +35,7 @@
             --ch6-bg: #fce7f3;
             --ch7-color: #0891b2; /* Cyan */
             --ch7-bg: #ecfeff;
-            --ch8-color: #4f46e5; /* Indigo for Ch8 */
+            --ch8-color: #4f46e5; /* Indigo */
             --ch8-bg: #eef2ff;
         }
 
@@ -102,6 +106,8 @@
             margin-right: 0.5rem;
             vertical-align: middle;
         }
+        .badge-ch1 { background-color: var(--ch1-bg); color: var(--ch1-color); border: 1px solid var(--ch1-color); }
+        .badge-ch2 { background-color: var(--ch2-bg); color: var(--ch2-color); border: 1px solid var(--ch2-color); }
         .badge-ch3 { background-color: var(--ch3-bg); color: var(--ch3-color); border: 1px solid var(--ch3-color); }
         .badge-ch4 { background-color: var(--ch4-bg); color: var(--ch4-color); border: 1px solid var(--ch4-color); }
         .badge-ch5 { background-color: var(--ch5-bg); color: var(--ch5-color); border: 1px solid var(--ch5-color); }
@@ -200,10 +206,12 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>例题全集</span>
                 </div>
-                <div class="sidebar-subtitle">Review: Ch3 - Ch8</div>
+                <div class="sidebar-subtitle">Review: Ch1 - Ch8</div>
             </div>
             <div id="nav-links"></div>
             <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fef2f2;border:1px solid #dc2626;display:inline-block;"></span> Ch1 简介 (Intro)</div>
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #ea580c;display:inline-block;"></span> Ch2 产业 (Industry)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfdf5;border:1px solid #059669;display:inline-block;"></span> Ch3 材料 (Materials)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
@@ -217,7 +225,7 @@
             <div id="section-header" class="section-header"></div>
             <div id="questions-container"></div>
             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
-                &copy; 2025 Generated for Semiconductor Physics • Chapter 3 - 8
+                &copy; 2025 Generated for Semiconductor Physics • Chapter 1 - 8
             </div>
         </main>
     </div>
@@ -290,6 +298,100 @@ const studyData = [
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
         description: 'Conceptual tests covering materials, devices, processes, packaging, and IC Design.\n涵盖半导体材料、器件、工艺、封测及芯片设计概念测试。',
         questions: [
+            // --- Ch1 Introduction ---
+            {
+                badge: 'Ch1',
+                q: `**Question:**
+                What is the relationship between Substrate, Wafer, and Die in IC fabrication?
+                
+                **题目:**
+                在IC制造中，衬底（Substrate）、晶圆（Wafer）和晶粒（Die）之间是什么关系？`,
+                a: `**Answer / 答案:**
+                1.  **Substrate (衬底):** The underlying semiconductor material (like a silicon ingot slice) upon which the circuit is built.
+                2.  **Wafer (晶圆):** A thin slice of semiconductor material (substrate) that serves as the foundation for building microelectronic devices. It undergoes many process steps.
+                3.  **Die (晶粒/裸片):** An individual circuit element (rectangular chip) cut from the wafer after fabrication is complete.
+                
+                **解析:** 衬底是基础材料，晶圆是加工载体，Die是切割后的独立芯片单元。`
+            },
+            {
+                badge: 'Ch1',
+                q: `**Question:**
+                What is the "planar process" in IC Fabrication?
+                
+                **题目:**
+                IC制造中的“平面工艺（Planar Process）”指的是什么？`,
+                a: `**Answer / 答案:**
+                Fabrication of semiconductor devices occurs **only in the first few microns** of the silicon near the wafer surface.
+                
+                **Analysis:** The bulk of the wafer thickness only serves as mechanical support (rigidity).
+                **解析:** 半导体器件的制造仅发生在靠近晶圆表面的几微米内，晶圆的主体厚度主要起机械支撑作用。`
+            },
+            {
+                badge: 'Ch1',
+                q: `**Question:**
+                Explain the difference between SoC, SiP, and Chiplet.
+                
+                **题目:**
+                解释 SoC（系统级芯片）、SiP（系统级封装）和 Chiplet（芯粒）的区别。`,
+                a: `**Answer / 答案:**
+                1.  **SoC (System on a Chip):** Integrates all components (IP cores) of a computer or other electronic system into a **single integrated circuit (die)**. (Planar integration).
+                2.  **SiP (System in a Package):** Multiple integrated circuits (dies) enclosed in a **single module/package**. Can be stacked vertically or placed side-by-side.
+                3.  **Chiplet:** Breaking a large SoC into smaller functional modules (dies) called chiplets, manufactured separately (potentially on different nodes), and reassembled using advanced packaging (like 2.5D/3D).
+                
+                **解析:** SoC是“片上系统”（单芯片），SiP是“封装内系统”（多芯片封装），Chiplet是“模块化SoC”（拆解后重组）。`
+            },
+            {
+                badge: 'Ch1',
+                q: `**Question:**
+                Microelectronics is a subfield of electronics. It is related to the study and manufacture of electronic components which are very small. Sometimes we also call it ( ).
+                
+                **题目:**
+                微电子学是电子学的一个分支，与微小电子元件的研究和制造有关。有时我们也称之为（ ）。`,
+                a: `**Answer / 答案: IC (Integrated Circuit / 集成电路)**
+                **Reason:** Because IC is the core of Microelectronics.
+                原因：因为集成电路是微电子的核心。`
+            },
+            
+            // --- Ch2 Industry ---
+            {
+                badge: 'Ch2',
+                q: `**Question:**
+                What is the relationship between Foundry and Fabless?
+                
+                **题目:**
+                晶圆代工厂（Foundry）与无晶圆设计公司（Fabless）之间是什么关系？`,
+                a: `**Answer / 答案:**
+                *   **Fabless:** Focuses only on **IC Design** and sales, without owning a factory (e.g., NVIDIA, Qualcomm, HiSilicon).
+                *   **Foundry:** Focuses only on **Manufacturing (Wafer Fabrication)**, providing services to Fabless companies (e.g., TSMC, SMIC).
+                *   **Relationship:** They are symbiotic. Fabless provides the design layout, Foundry manufactures it.
+                
+                **解析:** Fabless负责设计，Foundry负责制造，二者分工合作。`
+            },
+            {
+                badge: 'Ch2',
+                q: `**Question:**
+                In the IC Industry, what do IDM and OSAT stand for?
+                
+                **题目:**
+                在IC行业中，IDM 和 OSAT 分别代表什么？`,
+                a: `**Answer / 答案:**
+                1.  **IDM (Integrated Device Manufacturer):** Companies that do Design + Manufacturing + Packaging/Testing (e.g., Intel, Samsung, TI). (垂直整合制造)
+                2.  **OSAT (Outsourced Semiconductor Assembly and Test):** Companies that provide third-party packaging and testing services (e.g., ASE, JCET). (外包封测)`
+            },
+            {
+                badge: 'Ch2',
+                q: `**Question:**
+                What is "Multi-project Wafer" (MPW)?
+                
+                **题目:**
+                什么是“多项目晶圆”（MPW）？`,
+                a: `**Answer / 答案:**
+                A service where designs from **multiple different customers/projects** are placed on the **same wafer** to share the cost of masks and fabrication.
+                
+                **Analysis:** Ideal for prototyping and low-volume production.
+                **解析:** 将多个不同客户的设计放在同一片晶圆上流片，以分摊掩模版和制造成本，适合原型设计验证。`
+            },
+
             // --- Ch3 Questions ---
             { 
                 badge: 'Ch3', 
@@ -1014,6 +1116,40 @@ const studyData = [
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>',
         description: 'Chart analysis and experimental design questions.\n图表分析及实验设计题。',
         questions: [
+            // --- Ch1/Ch2 Analysis ---
+            {
+                badge: 'Ch1',
+                q: `**Question (Moore's Law & Trends):**
+                What is the future of Moore’s Law? What are the main trends of IC development?
+                
+                **题目 (摩尔定律与发展趋势):**
+                摩尔定律的未来如何？IC发展的主要趋势是什么？`,
+                a: `**Answer / 答案:**
+                1.  **Moore's Law (摩尔定律):** Integrated circuit complexity (number of transistors) doubles approx every 18-24 months.
+                2.  **Slowing Down:** Physical limits (quantum effects, lithography costs) are making scaling harder.
+                3.  **Trends (发展趋势):**
+                    *   **More Moore (延续摩尔):** Continued scaling (7nm -> 5nm -> 3nm -> 2nm) using GAA, EUV, etc.
+                    *   **More than Moore (超越摩尔):** Diversification. Integrating Analog, RF, Sensors, HV Power, Biochips.
+                    *   **Packaging:** SoC -> SiP -> Chiplets (3D Integration, Heterogeneous Integration).
+                
+                **解析:** 摩尔定律正在放缓但未失效。未来趋势分为：继续微缩（More Moore）和功能多样化（More than Moore），以及通过先进封装（Chiplet/SiP）提升性能。`
+            },
+            {
+                badge: 'Ch2',
+                q: `**Question (Industry Analysis):**
+                How can the China IC industry catch up the world leading pace? Mention the AI Chip "QiMeng 1".
+                
+                **题目 (产业分析):**
+                中国IC产业如何追赶世界领先水平？请提及AI芯片“启蒙1号”。`,
+                a: `**Answer / 答案:**
+                1.  **Challenges:** Heavy reliance on imported equipment (Lithography, EDA) and advanced processes (<7nm).
+                2.  **Strategies:**
+                    *   **State Support:** "New Whole Nation System" (新型举国体制), massive investment (Big Funds), education (IC as primary discipline).
+                    *   **Innovation:** Focus on AI, RISC-V, and Chiplets to bypass Moore's Law limits.
+                    *   **Example:** **QiMeng 1 (启蒙1号)**, the world's first fully AI-designed CPU (by CAS in 2023), showing potential for automated design to close the gap.
+                    *   **Ecosystem:** Building local supply chains (Equipment, Materials) and software ecosystems (LoongArch).`
+            },
+
             // --- Ch3 Analysis ---
             {
                 badge: 'Ch3',
@@ -1211,6 +1347,8 @@ function render() {
     const container = document.getElementById('questions-container');
     container.innerHTML = currentSection.questions.map((q, idx) => {
         let badgeClass = 'badge-ch3';
+        if (q.badge === 'Ch1') badgeClass = 'badge-ch1';
+        if (q.badge === 'Ch2') badgeClass = 'badge-ch2';
         if (q.badge === 'Ch4') badgeClass = 'badge-ch4';
         if (q.badge === 'Ch5') badgeClass = 'badge-ch5';
         if (q.badge === 'Ch6') badgeClass = 'badge-ch6';
@@ -1293,4 +1431,3 @@ render();
 </script>
 </body>
 </html>
-
