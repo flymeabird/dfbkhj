@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>半导体基础例题全集 (Ch3 - Ch6)</title>
+    <title>半导体基础例题全集 (Ch3 - Ch7)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
     <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css">
@@ -27,6 +27,8 @@
             --ch5-bg: #fff7ed;
             --ch6-color: #db2777; /* Pink for Ch6 */
             --ch6-bg: #fce7f3;
+            --ch7-color: #0891b2; /* Cyan for Ch7 */
+            --ch7-bg: #ecfeff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -100,6 +102,7 @@
         .badge-ch4 { background-color: var(--ch4-bg); color: var(--ch4-color); border: 1px solid var(--ch4-color); }
         .badge-ch5 { background-color: var(--ch5-bg); color: var(--ch5-color); border: 1px solid var(--ch5-color); }
         .badge-ch6 { background-color: var(--ch6-bg); color: var(--ch6-color); border: 1px solid var(--ch6-color); }
+        .badge-ch7 { background-color: var(--ch7-bg); color: var(--ch7-color); border: 1px solid var(--ch7-color); }
 
         /* Cards */
         .card {
@@ -192,14 +195,15 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>例题全集</span>
                 </div>
-                <div class="sidebar-subtitle">Review: Ch3 - Ch6</div>
+                <div class="sidebar-subtitle">Review: Ch3 - Ch7</div>
             </div>
             <div id="nav-links"></div>
             <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfdf5;border:1px solid #059669;display:inline-block;"></span> Ch3 材料 (Materials)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
-                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#fce7f3;border:1px solid #db2777;display:inline-block;"></span> Ch6 封测 (Assembly)</div>
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fce7f3;border:1px solid #db2777;display:inline-block;"></span> Ch6 封测 (Assembly)</div>
+                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#ecfeff;border:1px solid #0891b2;display:inline-block;"></span> Ch7 制造 (Fab)</div>
             </div>
         </aside>
 
@@ -207,7 +211,7 @@
             <div id="section-header" class="section-header"></div>
             <div id="questions-container"></div>
             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
-                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4, 5 & 6
+                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4, 5, 6 & 7
             </div>
         </main>
     </div>
@@ -278,7 +282,7 @@ const studyData = [
         id: 'quiz',
         title: '二、概念测验 (Quiz)',
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
-        description: 'Conceptual tests covering materials, devices, processes, and packaging.\n涵盖半导体材料、器件、工艺及封测的概念测试。',
+        description: 'Conceptual tests covering materials, devices, processes, packaging, and advanced fabrication.\n涵盖半导体材料、器件、工艺、封测及先进制造概念测试。',
         questions: [
             // --- Ch3 Questions ---
             { 
@@ -755,7 +759,7 @@ const studyData = [
                 (Formula: $R = k_1 \\frac{\\lambda}{NA}$)`
             },
 
-            // --- Ch6 Questions (NEWLY INTEGRATED) ---
+            // --- Ch6 Questions ---
             {
                 badge: 'Ch6',
                 q: `**Question:**
@@ -834,6 +838,71 @@ const studyData = [
                 * CP: Circuit Probing (Wafer Sort)
                 * FT: Final Test
                 原因：WLP是晶圆级封装技术，而非测试类型。`
+            },
+
+            // --- Ch7 Questions (NEWLY INTEGRATED) ---
+            {
+                badge: 'Ch7',
+                q: `**Question:**
+                Compare with the discrete devices, what are the structure features for IC devices?
+                
+                **题目:**
+                与分立器件相比，集成电路(IC)器件的结构特征是什么？`,
+                a: `**Answer / 答案:**
+                1. **Planarized integrated structure (平面化集成结构)**
+                2. **Must be isolated (必须隔离)** - e.g., STI (Shallow Trench Isolation).
+                3. **Components share the same semiconductor substrate (元器件共享同一衬底)**.
+                4. **Multilevel interconnection (多层互连)**.`
+            },
+            {
+                badge: 'Ch7',
+                q: `**Question:**
+                Polysilicon Gate was dominant since 1972. Because polysilicon gate can be realized ( ) and source, drain and gate formed simultaneously.
+                
+                **题目:**
+                自1972年以来，多晶硅栅占据主导地位。因为多晶硅栅可以实现（ ），且源、漏和栅极同时形成。`,
+                a: `**Answer / 答案: Self-alignment (自对准)**
+                **Reason:** The gate acts as a mask during source/drain implantation, automatically aligning the edges.
+                原因：栅极在源/漏注入时充当掩模，使边缘自动对准。`
+            },
+            {
+                badge: 'Ch7',
+                q: `**Question:**
+                HKMG is used mostly. Because that ( ) insulator layer might be used which can reduce ( ) current flowing through the structure.
+                
+                **题目:**
+                HKMG（高k金属栅）被广泛使用。因为可以使用（ ）绝缘层，从而减少流经结构的（ ）电流。`,
+                a: `**Answer / 答案: High-k (高k); Leakage (漏/隧穿)**
+                **Analysis:** High-k materials allow for a physically thicker gate oxide to prevent tunneling while maintaining the same capacitance ($C_{ox}$).
+                解析：高k材料允许在保持相同电容的情况下增加物理厚度，从而防止隧穿漏电。`
+            },
+            {
+                badge: 'Ch7',
+                q: `**Question:**
+                As for the MOSFET scaling down, the following structure is not the case for this technology ( )
+                Options: A. FinFET; B. HKMG; C. GAA; D. HEMT
+                
+                **题目:**
+                关于MOSFET的微缩，下列哪种结构不属于该技术范畴（ ）
+                选项: A. FinFET; B. HKMG; C. GAA; D. HEMT`,
+                a: `**Answer / 答案: D. HEMT**
+                **Analysis:** FinFET, HKMG, and GAA are technologies to continue Si-based CMOS scaling. **HEMT** (High Electron Mobility Transistor) is typically for III-V compound semiconductors (like GaAs) and RF/Microwave applications.
+                解析：FinFET, HKMG, GAA 均是硅基CMOS微缩的关键技术。HEMT主要用于III-V族化合物半导体和射频微波领域。`
+            },
+            {
+                badge: 'Ch7',
+                q: `**Question:**
+                Which of the following is the result from the rule of Uniform Scaling-down for the MOSFET devices?
+                Options: A. Wire delay is UP; B. Wire delay is DOWN; C. Gate Capacitance is UP; D. Gate Capacitance is DOWN
+                
+                **题目:**
+                下列哪项是MOSFET器件等比例微缩（Uniform Scaling-down）的结果？
+                选项: A. 导线延迟上升; B. 导线延迟下降; C. 栅电容上升; D. 栅电容下降`,
+                a: `**Answer / 答案: D. Gate Capacitance is DOWN (栅电容下降)**
+                **Analysis:**
+                1. **Gate Capacitance:** $C_{gate} \\rightarrow 1/\\kappa$ (Area scales by $1/\\kappa^2$, thickness by $1/\\kappa$, so total is $1/\\kappa$). -> **DOWN**
+                2. **Wire Delay:** Often remains constant or increases relative to gate delay (becomes a bottleneck). -> **UP/Constant**
+                解析：栅电容随尺寸微缩而减小。导线延迟通常成为瓶颈（相对上升）。`
             }
         ]
     },
@@ -975,6 +1044,38 @@ const studyData = [
                 **4. Etching Methods / 刻蚀方法:**
                 * **Wet Etching (湿法):** Chemical solution. **Isotropic** (undercuts/各向同性), low cost, high selectivity.
                 * **Dry Etching (干法/RIE):** Plasma/Ion. **Anisotropic** (Directional/各向异性), high precision, used for small features.`
+            },
+            // --- Ch7 Analysis (NEWLY INTEGRATED) ---
+            {
+                badge: 'Ch7',
+                q: `**Question (CMOS Inverter Cross-section Analysis):**
+                Refer to the CMOS inverter cross-section diagram (implied):
+                Identify the locations of the **Input (In)**, **Output (Out)**, **N-Well**, **NMOS**, **PMOS**, **Vdd**, and **GND**.
+                
+                **题目 (CMOS 反相器剖面图分析):**
+                参考CMOS反相器剖面图（需脑补或参考讲义图7）：
+                请标识出 **输入(In)**、**输出(Out)**、**N阱(N-Well)**、**NMOS**、**PMOS**、**Vdd** 和 **GND** 的位置。`,
+                a: `**Identification Guide / 识图技巧:**
+                
+                1. **Find the N-Well (找N阱):**
+                   - On a P-Substrate, the **PMOS** must be fabricated inside an **N-Well**. Look for the "deep tub" structure.
+                   - 在P型衬底上，PMOS必须做在N阱里。
+                
+                2. **Find Vdd (找电源):**
+                   - The Source of the **PMOS** (inside N-Well) connects to the highest potential (**Vdd**).
+                   - PMOS的源极接Vdd。
+                
+                3. **Find GND (找地):**
+                   - The Source of the **NMOS** (directly on P-Substrate) connects to Ground (**GND**).
+                   - NMOS的源极接地。
+                
+                4. **Find Input (找输入):**
+                   - The **Gates** of both NMOS and PMOS are connected together = **In**.
+                   - 两个管子的栅极连在一起即为输入。
+                
+                5. **Find Output (找输出):**
+                   - The **Drains** of both NMOS and PMOS are connected together = **Out**.
+                   - 两个管子的漏极连在一起即为输出。`
             }
         ]
     }
@@ -1008,6 +1109,7 @@ function render() {
         if (q.badge === 'Ch4') badgeClass = 'badge-ch4';
         if (q.badge === 'Ch5') badgeClass = 'badge-ch5';
         if (q.badge === 'Ch6') badgeClass = 'badge-ch6';
+        if (q.badge === 'Ch7') badgeClass = 'badge-ch7';
         
         // Hide missing images gracefully
         const imageHtml = q.img ? `
