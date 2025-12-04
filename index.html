@@ -6,9 +6,9 @@
     <title>半导体基础例题全集 (Bilingual Edition)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
-    <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" onerror="this.disabled=true;">
-    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.js" onerror="window.katex=null;"></script>
-    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/contrib/auto-render.min.js" onerror="window.renderMathInElement=null;"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css">
+    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdn.staticfile.net/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 
     <style>
         :root {
@@ -23,6 +23,8 @@
             --ch3-bg: #ecfdf5;
             --ch4-color: #7c3aed; /* Purple for Ch4 */
             --ch4-bg: #f5f3ff;
+            --ch5-color: #c2410c; /* Orange for Ch5 */
+            --ch5-bg: #fff7ed;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -94,6 +96,7 @@
         }
         .badge-ch3 { background-color: var(--ch3-bg); color: var(--ch3-color); border: 1px solid var(--ch3-color); }
         .badge-ch4 { background-color: var(--ch4-bg); color: var(--ch4-color); border: 1px solid var(--ch4-color); }
+        .badge-ch5 { background-color: var(--ch5-bg); color: var(--ch5-color); border: 1px solid var(--ch5-color); }
 
         /* Cards */
         .card {
@@ -186,12 +189,13 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>例题全集</span>
                 </div>
-                <div class="sidebar-subtitle">Ch3 Materials & Ch4 Devices</div>
+                <div class="sidebar-subtitle">Review: Ch3, Ch4 & Ch5</div>
             </div>
             <div id="nav-links"></div>
             <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfdf5;border:1px solid #059669;display:inline-block;"></span> Ch3 材料 (Materials)</div>
-                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
+                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
             </div>
         </aside>
 
@@ -199,7 +203,7 @@
             <div id="section-header" class="section-header"></div>
             <div id="questions-container"></div>
             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
-                &copy; 2025 Generated for Fundamentals of Devices • Chapter 3 & 4 • Bilingual Version
+                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4 & 5
             </div>
         </main>
     </div>
@@ -642,7 +646,8 @@ const studyData = [
                 a: `**Answer / 答案: D. Fermi level (费米能级)**
                 **Reason:** Doping introduces impurity levels and shifts the Fermi level ($E_F$) towards $E_c$ (N-type) or $E_v$ (P-type). Bandgap is intrinsic.
                 原因：掺杂引入杂质能级，使费米能级向导带或价带移动。带隙是本征属性，基本不变。` 
-            }
+            }, // --- Fixed Missing Comma Here ---
+
             // --- Ch5 Questions (Inserted) ---
              {
                 badge: 'Ch5',
@@ -847,7 +852,7 @@ const studyData = [
                 
                 **4. Principle / 原理:** Gate voltage modulates the **2DEG** density in the undoped GaAs channel, controlling $I_{DS}$.
                 栅极电压调节未掺杂 GaAs 沟道中的 **2DEG** 浓度，从而控制电流。`
-            }
+            },
             // --- Ch5 Analysis ---
             {
                 badge: 'Ch5',
@@ -910,17 +915,17 @@ function render() {
         <p class="section-desc">${parseText(currentSection.description)}</p>
     `;
 
-// ... 前面的代码保持不变 ...
-
     // Render Questions
     const container = document.getElementById('questions-container');
     container.innerHTML = currentSection.questions.map((q, idx) => {
-        const badgeClass = q.badge === 'Ch3' ? 'badge-ch3' : 'badge-ch4';
+        let badgeClass = 'badge-ch3';
+        if (q.badge === 'Ch4') badgeClass = 'badge-ch4';
+        if (q.badge === 'Ch5') badgeClass = 'badge-ch5';
         
-        // 图片生成逻辑保持不变
+        // Hide missing images gracefully
         const imageHtml = q.img ? `
             <div style="margin-top: 0.5rem; margin-bottom: 0.5rem; text-align: left;">
-                <img src="${q.img}" alt="Question Image" style="max-width: 100%; max-height: 200px; border-radius: 4px; border: 1px solid #e5e7eb;">
+                <img src="${q.img}" onerror="this.style.display='none'" alt="Question Image" style="max-width: 100%; max-height: 200px; border-radius: 4px; border: 1px solid #e5e7eb;">
             </div>
         ` : '';
 
@@ -951,7 +956,6 @@ function render() {
         `;
     }).join('');
 
-// ... 后面的代码保持不变 ...
     // Trigger Math Rendering
     if (window.renderMathInElement) {
         renderMathInElement(document.body, {
@@ -994,7 +998,3 @@ render();
 </script>
 </body>
 </html>
-
-
-
-
