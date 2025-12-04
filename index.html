@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>半导体基础例题全集 (Bilingual Edition)</title>
+    <title>半导体基础例题全集 (Ch3 - Ch6)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
     <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css">
@@ -25,6 +25,8 @@
             --ch4-bg: #f5f3ff;
             --ch5-color: #c2410c; /* Orange for Ch5 */
             --ch5-bg: #fff7ed;
+            --ch6-color: #db2777; /* Pink for Ch6 */
+            --ch6-bg: #fce7f3;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,6 +99,7 @@
         .badge-ch3 { background-color: var(--ch3-bg); color: var(--ch3-color); border: 1px solid var(--ch3-color); }
         .badge-ch4 { background-color: var(--ch4-bg); color: var(--ch4-color); border: 1px solid var(--ch4-color); }
         .badge-ch5 { background-color: var(--ch5-bg); color: var(--ch5-color); border: 1px solid var(--ch5-color); }
+        .badge-ch6 { background-color: var(--ch6-bg); color: var(--ch6-color); border: 1px solid var(--ch6-color); }
 
         /* Cards */
         .card {
@@ -189,13 +192,14 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>例题全集</span>
                 </div>
-                <div class="sidebar-subtitle">Review: Ch3, Ch4 & Ch5</div>
+                <div class="sidebar-subtitle">Review: Ch3 - Ch6</div>
             </div>
             <div id="nav-links"></div>
             <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfdf5;border:1px solid #059669;display:inline-block;"></span> Ch3 材料 (Materials)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
-                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
+                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#fce7f3;border:1px solid #db2777;display:inline-block;"></span> Ch6 封测 (Assembly)</div>
             </div>
         </aside>
 
@@ -203,7 +207,7 @@
             <div id="section-header" class="section-header"></div>
             <div id="questions-container"></div>
             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
-                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4 & 5
+                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4, 5 & 6
             </div>
         </main>
     </div>
@@ -274,7 +278,7 @@ const studyData = [
         id: 'quiz',
         title: '二、概念测验 (Quiz)',
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
-        description: 'Conceptual tests covering semiconductor materials and device physics.\n涵盖半导体材料及器件物理的概念测试。',
+        description: 'Conceptual tests covering materials, devices, processes, and packaging.\n涵盖半导体材料、器件、工艺及封测的概念测试。',
         questions: [
             // --- Ch3 Questions ---
             { 
@@ -646,9 +650,9 @@ const studyData = [
                 a: `**Answer / 答案: D. Fermi level (费米能级)**
                 **Reason:** Doping introduces impurity levels and shifts the Fermi level ($E_F$) towards $E_c$ (N-type) or $E_v$ (P-type). Bandgap is intrinsic.
                 原因：掺杂引入杂质能级，使费米能级向导带或价带移动。带隙是本征属性，基本不变。` 
-            }, // --- Fixed Missing Comma Here ---
+            },
 
-            // --- Ch5 Questions (Inserted) ---
+            // --- Ch5 Questions ---
              {
                 badge: 'Ch5',
                 q: `**Question:**
@@ -749,6 +753,87 @@ const studyData = [
                 1. **Wavelength (波长 $\\lambda$)**
                 2. **Numerical Aperture (数值孔径 NA)**
                 (Formula: $R = k_1 \\frac{\\lambda}{NA}$)`
+            },
+
+            // --- Ch6 Questions (NEWLY INTEGRATED) ---
+            {
+                badge: 'Ch6',
+                q: `**Question:**
+                Which of the following process is the first step in the BEOL of IC Fabrication?
+                A. Die Attach
+                B. Back Grinding
+                C. Wire Bonding
+                D. Wafer Saw/Scribe
+                
+                **题目:**
+                下列哪个工艺是IC制造后道工艺（BEOL）的第一步？
+                A. 芯片粘接
+                B. 背面减薄
+                C. 引线键合
+                D. 晶圆切割`,
+                a: `**Answer / 答案: B. Back Grinding (背面减薄)**
+                **Reason:** Before dicing and packaging, the wafer must be thinned to the required thickness.
+                原因：在切割和封装之前，必须先将晶圆减薄至所需厚度。`
+            },
+            {
+                badge: 'Ch6',
+                q: `**Question:**
+                IC manufacturing back-end processes mainly include ( ), ( ), ( ) and ( ).
+                
+                **题目:**
+                IC制造后道工艺主要包括（ ）、（ ）、（ ）和（ ）。`,
+                a: `**Answer / 答案:**
+                (Any 4 of the following / 任选四个):
+                1. **Wafer Dicing/Sawing (晶圆切割)**
+                2. **Die Attach (芯片粘接/贴片)**
+                3. **Wire Bonding (引线键合)**
+                4. **Molding (模塑/塑封)**
+                5. **Trim & Form (切筋成型)**
+                6. **Final Test (终测)**`
+            },
+            {
+                badge: 'Ch6',
+                q: `**Question:**
+                For the development of IC package, the ( ) is TRUE for the history from the past to the present.
+                A. DIP-QFP-CSP-SiP
+                B. DIP-QFP-SiP-CSP
+                C. QFP-DIP-CSP-SiP
+                D. QFP-DIP-SiP-CSP
+                
+                **题目:**
+                关于IC封装的发展史，从过去到现在，正确的是（ ）。`,
+                a: `**Answer / 答案: A. DIP-QFP-CSP-SiP**
+                **Timeline:** Dual Inline Package -> Quad Flat Package -> Chip Scale Package -> System in Package.
+                时间线：双列直插 -> 四方扁平 -> 芯片级封装 -> 系统级封装。`
+            },
+            {
+                badge: 'Ch6',
+                q: `**Question:**
+                In the following IC package, ( ) is NOT applied SMT (Surface Mount Technology).
+                A. DIP  B. BGA  C. QFP  D. SOIC
+                
+                **题目:**
+                下列IC封装中，（ ）不属于SMT（表面贴装技术）。
+                A. DIP  B. BGA  C. QFP  D. SOIC`,
+                a: `**Answer / 答案: A. DIP (Dual Inline Package)**
+                **Reason:** DIP uses **Through-Hole Technology (THT)**, while BGA, QFP, and SOIC are Surface Mount types.
+                原因：DIP使用通孔插装技术，而其他选项均为表面贴装类型。`
+            },
+            {
+                badge: 'Ch6',
+                q: `**Question:**
+                Which the following is not the IC Test ( )?
+                A. WAT  B. CP  C. FT  D. WLP
+                
+                **题目:**
+                下列哪项不属于IC测试（ ）？
+                A. WAT  B. CP  C. FT  D. WLP`,
+                a: `**Answer / 答案: D. WLP (Wafer Level Package)**
+                **Reason:** WLP stands for **Wafer Level Package**, which is a packaging technology, not a test type.
+                * WAT: Wafer Acceptance Test
+                * CP: Circuit Probing (Wafer Sort)
+                * FT: Final Test
+                原因：WLP是晶圆级封装技术，而非测试类型。`
             }
         ]
     },
@@ -857,7 +942,7 @@ const studyData = [
             {
                 badge: 'Ch5',
                 q: `**Question (Photolithography Process):**
-                Here is a device under exposing in a photolithography processing. The process is to make the layer as an **interconnector** (Assume the layer is Metal). Note: The illuminated area is the transparent pattern of the mask.
+                Here is a device under exposing in a photolithography processing. The process is to make the layer as an **interconnector** (Assume the layer is Metal). Note: The illuminated area is the transparent pattern of the mask (a hole in the mask).
                 
                 **(1) How to choose the photoresist? (Positive PR or Negative PR)**
                 **(2) To draw the sketch after the development?**
@@ -865,18 +950,19 @@ const studyData = [
                 **(4) Usually how many ways to do etching in IC Fab processing? What are the main differences between them?**
                 
                 **题目 (光刻工艺分析):**
-                下图为光刻曝光过程。该工艺旨在制作**互连线**（假设该层为金属）。注：光照处对应掩模的透明区域。
+                下图为光刻曝光过程。该工艺旨在制作**互连线**（假设该层为金属）。注：光照处对应掩模的透明区域（掩模上的开孔）。
                 (1) 如何选择光刻胶？（正胶还是负胶）
                 (2) 画出显影后的草图？
                 (3) 画出刻蚀后的草图？
                 (4) IC制造中通常有几种刻蚀方法？主要区别是什么？`,
                 a: `**1. Photoresist Choice / 光刻胶选择:**
                 **Negative PR (负胶)**
-                **Reasoning:** The mask has a hole (light passes). The goal is an interconnector (wire), so we want the metal in the center to **stay**.
+                **Reasoning:** The mask has a hole (light passes). The goal is an interconnector (wire), so we want the metal in the center (where light hits) to **stay**.
                 * Light hits Center -> Negative PR hardens (becomes insoluble).
                 * Developer removes unexposed sides.
                 * Etching removes metal on sides, **Center Metal Remains**.
                 (If Positive PR was used: Light hits center -> Center dissolves -> Hole in metal. This is for contact holes, not wires).
+                理由：掩模中间透光。目标是做互连线（保留金属）。使用负胶，曝光区域变硬保留，保护下方的金属不被刻蚀。
                 
                 **2. After Development / 显影后:**
                 A block of Photoresist remains in the center of the substrate.
@@ -887,8 +973,8 @@ const studyData = [
                 (光刻胶下方的金属层保留，形成导线)
                 
                 **4. Etching Methods / 刻蚀方法:**
-                * **Wet Etching (湿法):** Chemical solution. **Isotropic** (undercuts), low cost, high selectivity.
-                * **Dry Etching (干法/RIE):** Plasma/Ion. **Anisotropic** (Directional), high precision, used for small features.`
+                * **Wet Etching (湿法):** Chemical solution. **Isotropic** (undercuts/各向同性), low cost, high selectivity.
+                * **Dry Etching (干法/RIE):** Plasma/Ion. **Anisotropic** (Directional/各向异性), high precision, used for small features.`
             }
         ]
     }
@@ -921,6 +1007,7 @@ function render() {
         let badgeClass = 'badge-ch3';
         if (q.badge === 'Ch4') badgeClass = 'badge-ch4';
         if (q.badge === 'Ch5') badgeClass = 'badge-ch5';
+        if (q.badge === 'Ch6') badgeClass = 'badge-ch6';
         
         // Hide missing images gracefully
         const imageHtml = q.img ? `
