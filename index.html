@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>半导体基础例题全集 (Ch3 - Ch7)</title>
+    <title>半导体基础例题全集 (Ch3 - Ch8)</title>
     
     <!-- 国内优化：使用 Staticfile (七牛云) CDN 加载 KaTeX -->
     <link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css">
@@ -19,16 +19,20 @@
             --primary-light: #eff6ff;
             --white: #ffffff;
             --border: #e5e7eb;
-            --ch3-color: #059669; /* Green for Ch3 */
+            
+            /* Chapter Colors */
+            --ch3-color: #059669; /* Green */
             --ch3-bg: #ecfdf5;
-            --ch4-color: #7c3aed; /* Purple for Ch4 */
+            --ch4-color: #7c3aed; /* Purple */
             --ch4-bg: #f5f3ff;
-            --ch5-color: #c2410c; /* Orange for Ch5 */
+            --ch5-color: #c2410c; /* Orange */
             --ch5-bg: #fff7ed;
-            --ch6-color: #db2777; /* Pink for Ch6 */
+            --ch6-color: #db2777; /* Pink */
             --ch6-bg: #fce7f3;
-            --ch7-color: #0891b2; /* Cyan for Ch7 */
+            --ch7-color: #0891b2; /* Cyan */
             --ch7-bg: #ecfeff;
+            --ch8-color: #4f46e5; /* Indigo for Ch8 */
+            --ch8-bg: #eef2ff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,6 +107,7 @@
         .badge-ch5 { background-color: var(--ch5-bg); color: var(--ch5-color); border: 1px solid var(--ch5-color); }
         .badge-ch6 { background-color: var(--ch6-bg); color: var(--ch6-color); border: 1px solid var(--ch6-color); }
         .badge-ch7 { background-color: var(--ch7-bg); color: var(--ch7-color); border: 1px solid var(--ch7-color); }
+        .badge-ch8 { background-color: var(--ch8-bg); color: var(--ch8-color); border: 1px solid var(--ch8-color); }
 
         /* Cards */
         .card {
@@ -195,7 +200,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>例题全集</span>
                 </div>
-                <div class="sidebar-subtitle">Review: Ch3 - Ch7</div>
+                <div class="sidebar-subtitle">Review: Ch3 - Ch8</div>
             </div>
             <div id="nav-links"></div>
             <div style="margin-top: 2rem; font-size: 0.75rem; color: #9ca3af; padding: 0 1rem;">
@@ -203,7 +208,8 @@
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#f5f3ff;border:1px solid #7c3aed;display:inline-block;"></span> Ch4 器件 (Devices)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fff7ed;border:1px solid #c2410c;display:inline-block;"></span> Ch5 工艺 (Process)</div>
                 <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#fce7f3;border:1px solid #db2777;display:inline-block;"></span> Ch6 封测 (Assembly)</div>
-                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#ecfeff;border:1px solid #0891b2;display:inline-block;"></span> Ch7 制造 (Fab)</div>
+                <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;"><span style="width:10px;height:10px;background:#ecfeff;border:1px solid #0891b2;display:inline-block;"></span> Ch7 制造 (Fab)</div>
+                <div style="display:flex; align-items:center; gap:5px;"><span style="width:10px;height:10px;background:#eef2ff;border:1px solid #4f46e5;display:inline-block;"></span> Ch8 设计 (IC Design)</div>
             </div>
         </aside>
 
@@ -211,7 +217,7 @@
             <div id="section-header" class="section-header"></div>
             <div id="questions-container"></div>
             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 0.875rem;">
-                &copy; 2025 Generated for Semiconductor Physics • Chapter 3, 4, 5, 6 & 7
+                &copy; 2025 Generated for Semiconductor Physics • Chapter 3 - 8
             </div>
         </main>
     </div>
@@ -282,7 +288,7 @@ const studyData = [
         id: 'quiz',
         title: '二、概念测验 (Quiz)',
         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
-        description: 'Conceptual tests covering materials, devices, processes, packaging, and advanced fabrication.\n涵盖半导体材料、器件、工艺、封测及先进制造概念测试。',
+        description: 'Conceptual tests covering materials, devices, processes, packaging, and IC Design.\n涵盖半导体材料、器件、工艺、封测及芯片设计概念测试。',
         questions: [
             // --- Ch3 Questions ---
             { 
@@ -840,7 +846,7 @@ const studyData = [
                 原因：WLP是晶圆级封装技术，而非测试类型。`
             },
 
-            // --- Ch7 Questions (NEWLY INTEGRATED) ---
+            // --- Ch7 Questions ---
             {
                 badge: 'Ch7',
                 q: `**Question:**
@@ -914,6 +920,91 @@ const studyData = [
                 a: `**Answer / 答案: Bipolar (or BJT) and CMOS**
                 **Analysis:** BiCMOS integrates the low power consumption and high integration density of **CMOS** with the high speed and high current driving capability of **Bipolar (BJT)** transistors.
                 解析：BiCMOS 集成了 **CMOS** 的低功耗、高集成度优势与 **双极型晶体管 (Bipolar/BJT)** 的高速、大电流驱动能力。`
+            },
+
+            // --- Ch8 Questions (New Addition) ---
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q1: ASIC design is to avoid the redesign and reverification of frequently used cells such as basic gates and arithmetic and memory modules, designers most often resort to ( ).
+                
+                **题目:**
+                Q1: ASIC设计为了避免对常用的单元（如基本门、算术和存储模块）进行重复设计和重复验证，设计者最常诉诸于 ( )。`,
+                a: `**Answer / 答案: Cell libraries (单元库) / Standard Cells (标准单元)**
+                **Source:** Slide 18 states "designers most often resort to **cell libraries**."`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q2: Integrated circuit layout, also known IC layout, IC mask layout, or mask design, is the representation of an integrated circuit in terms of ( ) which correspond to the patterns of metal, oxide, or semiconductor layers that make up the components of the integrated circuit.
+                
+                **题目:**
+                Q2: 集成电路版图（也称为IC版图、IC掩模版图或掩模设计）是用 ( ) 来表示集成电路，这些形状对应于构成集成电路元件的金属、氧化物或半导体层的图案。`,
+                a: `**Answer / 答案: planar geometric shapes (平面几何形状)**
+                **Source:** Slide 28 definition.`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q3: The layout must pass a series of checks in a process known as verification. The 3 most common checks in the verification process are ( )
+                
+                **题目:**
+                Q3: 版图必须通过一系列称为验证的检查过程。验证过程中最常见的 3 种检查是 ( )`,
+                a: `**Answer / 答案: DRC, ERC and LVS**
+                **Full Names:**
+                1. **DRC:** Design Rule Checking (设计规则检查)
+                2. **ERC:** Electric Rule Checking (电气规则检查)
+                3. **LVS:** Layout Versus Schematic (版图与原理图对照)`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q4: Compared to the NMOS devices, the advantages of CMOS invertor is ( ); CMOS Transmission Gate is ( )
+                
+                **题目:**
+                Q4: 与NMOS器件相比，CMOS反相器的优点是 ( )；CMOS传输门的优点是 ( )`,
+                a: `**Answer / 答案:**
+                1. **Low static power consumption (低静态功耗)**
+                2. **Transmitting good logic 1 and 0 (No threshold loss) / 传输良好的逻辑1和0（无阈值损失）**
+                **Explanation:** 
+                * CMOS inverter ideally has zero static current (Slide 39 implications).
+                * Transmission gates use parallel PMOS/NMOS to pass full Vdd and Gnd levels (Rail-to-Rail), unlike single NMOS which loses $V_{tn}$.`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q5: When all IC layout verification is complete the data is translated into an industry standard format, typically ( ), and sent to a semiconductor foundry.
+                A. LVS   B. DRC.   C. GDSII   D. ERC
+                
+                **题目:**
+                Q5: 当所有IC版图验证完成后，数据被转换为行业标准格式，通常是 ( )，并发送给半导体代工厂。
+                A. LVS   B. DRC.   C. GDSII   D. ERC`,
+                a: `**Answer / 答案: C. GDSII**
+                **Source:** Slide 12 & 31 ("typically **GDSII**").`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q6: Which of the following steps is the Front-end design (前端设计) in digital IC design flows( ).
+                A. Placement   B. Synthesis.   C. Routing   D. DFT
+                
+                **题目:**
+                Q6: 下列哪个步骤属于数字IC设计流程中的前端设计 ( )。
+                A. 布局   B. 综合   C. 布线   D. DFT`,
+                a: `**Answer / 答案: B. Synthesis (综合)**
+                **Source:** Slide 14 and 47. Placement and Routing are Back-end.`
+            },
+            {
+                badge: 'Ch8',
+                q: `**Question:**
+                Q7: Which of the following steps is the Back-end design (后端设计) in digital IC design flows( ).
+                A. RTL Code   B. Synthesis.   C. Routing   D. Pre-simulation
+                
+                **题目:**
+                Q7: 下列哪个步骤属于数字IC设计流程中的后端设计 ( )。
+                A. RTL代码   B. 综合   C. 布线   D. 前仿真`,
+                a: `**Answer / 答案: C. Routing (布线)**
+                **Source:** Slide 12 calls "Placement & Routing" the biggest part of Back-end.`
             }
         ]
     },
@@ -1056,7 +1147,7 @@ const studyData = [
                 * **Wet Etching (湿法):** Chemical solution. **Isotropic** (undercuts/各向同性), low cost, high selectivity.
                 * **Dry Etching (干法/RIE):** Plasma/Ion. **Anisotropic** (Directional/各向异性), high precision, used for small features.`
             },
-            // --- Ch7 Analysis (NEWLY INTEGRATED) ---
+            // --- Ch7 Analysis ---
             {
                 badge: 'Ch7',
                 q: `**Question (CMOS Inverter Cross-section Analysis):**
@@ -1121,6 +1212,7 @@ function render() {
         if (q.badge === 'Ch5') badgeClass = 'badge-ch5';
         if (q.badge === 'Ch6') badgeClass = 'badge-ch6';
         if (q.badge === 'Ch7') badgeClass = 'badge-ch7';
+        if (q.badge === 'Ch8') badgeClass = 'badge-ch8';
         
         // Hide missing images gracefully
         const imageHtml = q.img ? `
